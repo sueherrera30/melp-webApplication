@@ -23,7 +23,7 @@
 
 .conteiner-text p{
 	padding: 5%;
-	font-size: 2vw;
+	font-size: 1.5vw;
 	font-weight: bold;
 	font-family: 'Nunito', sans-serif;
 }
@@ -31,7 +31,7 @@
 .conteiner-text h5{
 	padding:5%;
 	
-	font-size: 1.5vw;
+	font-size: 1.3vw;
 	font-family: 'Nunito', sans-serif;
 }
 
@@ -44,7 +44,7 @@
 }
 
 .subtitle{
-	font-size:0.5wv;
+	font-size:1wv;
 }
 
 
