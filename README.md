@@ -1,4 +1,13 @@
 # melp-webApplication
+
+warning!
+
+This is part of the plan that i tried to follow,
+but because the rush and lack of time I was not able to finished.
+You will find the whole data information in the console  by clicking the name of the restaurant.
+
+////////////////////////////////////////////////
+
 This is a web application which shows the best restaurants of the city. They are orded by rating and alphabetically and you could find the main information of the restaurant.
 
 
