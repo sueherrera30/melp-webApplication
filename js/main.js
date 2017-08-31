@@ -19,13 +19,7 @@ function OrderingAlphabetically() {
 	theRequest.onload = function () {
 		var info = JSON.parse(theRequest.responseText);
 		info.forEach(function (response) {
-			/*save required values*/
-			var id = response.id;
-			var rating = response.rating;
 			var name = response.name;
-			var contact = response.contact;
-			var address = response.address;
-			
 			nameArray.push(name)
 			nameArray.sort();
 		})
@@ -35,17 +29,15 @@ function OrderingAlphabetically() {
 				totalNameArray.push(nameValue);
 			showingInDomAlphabeth(totalNameArray);
 			});
-
-		console.log(nameArray);
-		
 	};
 
 	theRequest.send();
 };
 
+
+
 /*ordering by rating*/
 var ratingAndNameArray = [];
-
 
 function OrderingByRating() {
 	var theRequest = new XMLHttpRequest();
@@ -53,35 +45,23 @@ function OrderingByRating() {
 	theRequest.onload = function () {
 		var info = JSON.parse(theRequest.responseText);
 		info.forEach(function (response) {
-			/*save required values*/
-			var id = response.id;
 			var rating = response.rating;
 			var name = response.name;
-			console.log(name);
-			var contact = response.contact;
-			var address = response.address;
 			
 			ratingAndNameArray.push(rating);
 			ratingAndNameArray.sort(function (a, b) {
 				return b - a			
 			});
-			
-			
-				var arrayNames = [];
+			   var arrayNames = [];
 				arrayNames.push(name);
-				console.log(arrayNames);
-		
-			
-			
+	
 		});
 			
 		ratingAndNameArray.forEach(function(ratingValue){
 			var totalRatingArray = [];
-		   totalRatingArray.push(ratingAndNameArray + name);
+		   totalRatingArray.push(ratingAndNameArray, name);
 			showingInDomRating(ratingValue,name);
 			});
-		
-		/*console.log(ratingAndNameArray);*/
 
 	};
 	theRequest.send();
@@ -114,13 +94,13 @@ function showingInDomAlphabeth(totalNameArray) {
 	li.appendChild(p1);
 	li.appendChild(p);
 	alphabethContainer.appendChild(li);		
-	li.addEventListener("click", showingWholeInformation);
+	this.addEventListener("click", showingWholeInformation);
 }
 
 
 /*showing in dowm by rating*/
 
-function showingInDomRating(ratingAndNameArray,name) {
+function showingInDomRating(ratingAndNameArray,arrayNames) {
 	/*getting elements from dom*/
   var ratingContainer = document.getElementById("containerRating");
   
@@ -129,7 +109,7 @@ function showingInDomRating(ratingAndNameArray,name) {
 	/*creating new elements*/
 	whiteContainer.style.background = "transparent";
 	var li = document.createElement("li");
-	li.className += "row collection-item";
+	li.className += "row collection-item modal-trigger";
 	var pRat = document.createElement("p");
 	pRat.className += "col m6 s6";
 	pRat.style.color= "#f0cf7b";
@@ -142,28 +122,67 @@ function showingInDomRating(ratingAndNameArray,name) {
 	pRat.textContent = ratingAndNameArray + " stars";
 	li.appendChild(p);
 	/*var pName = document.createElement("p");*/
-	p.textContent = name;
+	p.textContent = arrayNames;
 	/*pName.className = "green-text col m5 s5";
 	li.appendChild(pName);*/
+	li.href = "#modal1";
 	ratingContainer.appendChild(li);
 	
-  li.addEventListener("click", showingWholeInformation);
+ li.addEventListener("click", showingWholeInformation);
 }
 
+var display = 	
+  '<div id="modal1" class="modal">'+
+    '<div class="modal-content center">'+
+      '<h4>__restaurantName__</h4>'+
+	   '<p>__rating__</p>'+
+      '<p>__id__</p>'+
+	   '<p>Contact: </p>'+
+	'<ul>'+ 
+	'<li>__site__</li>'
+    '<li>__email__</li>'
+    '<li>__phone__</li>'
+	'</ul>'+
+	'<p>Address: </p>'+
+	'<ul>'+ 
+	'<li>__street__</li>'
+    '<li>__city__</li>'
+    '<li>__state__</li>'
+	'</ul>'+
+    '</div>'+
+  ' <div class="modal-footer">'+
+     ' <a href="#modal1" class="modal-action modal-close waves-effect waves-green btn-flat"> Agree</a>'+
+    '</div> '+
+ ' </div>';
+          
 
-function showingWholeInformation(response){
-	alert(response);
-}
-
-
-
-
-
-
-
-
-
-
+	
+function showingWholeInformation(){
+	var emptyDisplay = '';
+	var theRequest = new XMLHttpRequest();
+	theRequest.open('GET', url);
+	theRequest.onload = function () {
+		var info = JSON.parse(theRequest.responseText);
+		
+		info.forEach(function (response) {
+			/*var id = response.id;
+			var rating = response.rating;
+			var name = response.name;
+			var contact = response.contact;
+			var address = response.address;*/
+			
+		info.forEach(function(data){
+	console.log(data.rating);
+	console.log(data.name);
+	console.log(data.contact);
+	console.log(data.address);
+			
+		})
+	});
+					 
+};
+	theRequest.send();
+	};
 
 
 
